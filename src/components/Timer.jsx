@@ -21,7 +21,7 @@ const useStyles = makeStyles({
  const Timer = ({ session, length }) => {
 
     const classes = useStyles();
-    const bgColor = session === 'break' ? 'success.main' : 'primary.main';
+    const bgColor = session === 'break' ? 'success.main' : 'secondary.main';
 
     return(
         <Box className={classes.root} backgroundColor={bgColor}>

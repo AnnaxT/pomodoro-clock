@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 const Buttons = ({ isCountingDown, onStartStop, onReset, session }) => {
 
     const classes = useStyles();
-    const bgColor = session === 'break' ? 'success' : 'primary';
+    const bgColor = session === 'break' ? 'success' : 'secondary';
 
     
     return(

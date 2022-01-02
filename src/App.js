@@ -12,10 +12,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 
 const mainRed = "#d32f2f";
-const mainGrey ="#37474f";
-const lightGrey = "#62727b";
 const mainGreen = '#2e7d32';
-const darkGray = '#102027';
+const mainGrey = '#102027';
+const lightGrey = "#62727b";
 
 const useStyles = makeStyles(theme => ({
 
@@ -50,13 +49,12 @@ const useStyles = makeStyles(theme => ({
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      main: mainRed,
-    },
-    secondary: {
       main: mainGrey,
-      light: lightGrey,
-      dark: darkGray,
+    },
+    secondary: { 
+      main: mainRed,
     },
     success: {
       main: mainGreen,

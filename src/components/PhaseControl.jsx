@@ -3,7 +3,6 @@ import { Typography, IconButton, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
 import ArrowUpwardOutlinedIcon from '@mui/icons-material/ArrowUpwardOutlined';
-import { pink, white } from '@mui/material/colors';
 
 const useStyles = makeStyles({
     root: {
@@ -44,7 +43,7 @@ export default function PhaseControl( {session, length, onArrowUp, onArrowDown }
                 onClick={handleArrowDown}
              
             >
-                <ArrowDownwardOutlinedIcon fontSize="large" color='primary'/>
+                <ArrowDownwardOutlinedIcon fontSize="large" color='secondary'/>
             </IconButton>
             <Typography variant="h6" id={`${session}-length`}>
                 {length}
@@ -54,7 +53,7 @@ export default function PhaseControl( {session, length, onArrowUp, onArrowDown }
                 id={`${session}-increment`}
                 onClick={handleArrowUp}
             >
-                <ArrowUpwardOutlinedIcon fontSize="large" color='primary'/>
+                <ArrowUpwardOutlinedIcon fontSize="large" color='secondary'/>
             </IconButton>
 
         </Box>

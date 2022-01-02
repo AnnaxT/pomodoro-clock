@@ -1,25 +1,24 @@
 import React from 'react';
 import { Paper } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
-const useStyles = makeStyles({
-    root: {
-        display: 'grid',
-        gridTemplateColumns: 'repeat(1, 1fr)',
-        backgroundColor: '#102027 !important',
-        color: '#fff !important',
-        justifyItems: 'center',
-    },
 
-});
+const containerStyles = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(1, 1fr)',
+    backgroundColor: 'primary.main',
+    backgroundImage: 'none',
+    justifyItems: 'center',
+    '@media screen and (max-width: 375px)': {
+        width:'100vw',
+    }
+}
 
 
 const Container = ({ children }) => {
-    const classes = useStyles();
 
     return (
 
-        <Paper square outlined className = {classes.root} elevation={15}>
+        <Paper square outlined sx={containerStyles} elevation={15}>
             { children }
         </Paper>
     )

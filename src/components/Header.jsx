@@ -1,32 +1,39 @@
 import React from 'react';
-import { Paper, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Paper, Typography, useMediaQuery } from '@mui/material';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 
-const useStyles = makeStyles({
-    root: {  
-        textAlign: 'center',
-        padding: 20,
-        backgroundColor: '#102027 !important',
-        color: '#fff !important',
-        }
-    
-});
+const headerStyles = {
+    textAlign: 'center',
+    padding: 4,
+    backgroundColor: 'primary.main',
+    backgroundImage: 'none',
+    '@media screen and (max-width: 375px)': {
+        pb: 2,
+    }
+}
+
+const textStyles = {
+    typography: 'h2',
+    '@media screen and (max-width: 375px)': {
+        typography: 'h3',
+        fontWeight: 'fontWeightLight'
+    }
+
+}
 
 const Header = () => {
 
-    const classes = useStyles();
+    const matches500 = useMediaQuery('(max-width: 500px)');
 
     return( 
-        <Paper
-       
-        square
-        className={classes.root} 
-        elevation={15}
-        >
-            <Typography variant="h2" component="h1"> 
-                Pomodoro Cl
-                <AccessAlarmIcon sx={{ fontSize: 45, color: 'primary.main', marginBottom: '-5px' }} />
+          
+        <Paper square sx={headerStyles} elevation={15} >
+            <Typography sx={textStyles}  component="h1"> 
+                Pomodoro
+                  {/* Insert break line for screens below 500px  */}
+                  {matches500 ? <br /> : " " }
+                Cl
+                <AccessAlarmIcon sx={{ fontSize: 45, color: 'secondary.main', marginBottom: '-5px' }} />
                 ck
             </Typography>
         </Paper>
