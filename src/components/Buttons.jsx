@@ -36,6 +36,7 @@ const Buttons = ({ isCountingDown, onStartStop, onReset, session }) => {
             </IconButton>
 
             <IconButton
+            id="reset"
             onClick={()=> onReset()}
             >
                 <AutorenewIcon

@@ -8,7 +8,7 @@ import Buttons from './components/Buttons';
 import { makeStyles } from '@mui/styles';
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { mmss } from './mmss.js'
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 
 const mainRed = "#d32f2f";
@@ -16,7 +16,31 @@ const mainGreen = '#2e7d32';
 const mainGrey = '#102027';
 const lightGrey = "#62727b";
 
-const useStyles = makeStyles(theme => ({
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: mainGrey,
+    },
+    secondary: { 
+      main: mainRed,
+    },
+    success: {
+      main: mainGreen,
+    }
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 1000,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+});
+
+const useStyles = makeStyles(() => ({
 
     root: {
       display: 'flex',
@@ -25,10 +49,17 @@ const useStyles = makeStyles(theme => ({
       height: '100vh',
       weight: '100vw',
       backgroundColor: lightGrey,
+      [`${theme.breakpoints.down('md')} and (orientation: landscape)`]: {
+        height: 'auto',
+    },
     },
     layout: {
       display: 'grid',
       gridRowGap: 15,
+      [`${theme.breakpoints.down('md')} and (orientation: landscape)`]: {
+        padding: '25px 0',
+    },
+      
    },
    phase: {
      display: 'flex',
@@ -47,20 +78,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: mainGrey,
-    },
-    secondary: { 
-      main: mainRed,
-    },
-    success: {
-      main: mainGreen,
-    }
-  }
-});
+
 
 function App() {
 

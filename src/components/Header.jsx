@@ -4,7 +4,7 @@ import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 
 const headerStyles = {
     textAlign: 'center',
-    padding: 4,
+    padding: 3,
     backgroundColor: 'primary.main',
     backgroundImage: 'none',
     '@media screen and (max-width: 375px)': {

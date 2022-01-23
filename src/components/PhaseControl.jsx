@@ -19,6 +19,9 @@ const useStyles = makeStyles({
         fontWeight: 100,
         textAlign: 'center',
         whiteSpace: 'nowrap',
+        '@media (max-width: 350px)' : {
+            whiteSpace: 'normal'
+          }
     }
 })
 

@@ -28,6 +28,7 @@ const useStyles = makeStyles({
             <Typography
             className={classes.label}
             variant='h3'
+            id="timer-label"
             >
                 {session}
             </Typography>

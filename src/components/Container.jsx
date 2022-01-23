@@ -8,9 +8,10 @@ const containerStyles = {
     backgroundColor: 'primary.main',
     backgroundImage: 'none',
     justifyItems: 'center',
-    '@media screen and (max-width: 375px)': {
+    '@media screen and (max-width: 414px)': {
         width:'100vw',
-    }
+    },
+
 }
 
 
