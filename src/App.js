@@ -1,15 +1,15 @@
 import './App.css';
 import Header from './components/Header';
 import Container from './components/Container';
-import Footer from './components/Footer';
 import PhaseControl from './components/PhaseControl';
 import Timer from './components/Timer';
 import Buttons from './components/Buttons';
 import { makeStyles } from '@mui/styles';
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { mmss } from './mmss.js'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
+import gong from './gong_sound.wav'
 
 const mainRed = "#d32f2f";
 const mainGreen = '#2e7d32';
@@ -55,7 +55,7 @@ const useStyles = makeStyles(() => ({
     },
     layout: {
       display: 'grid',
-      gridRowGap: 15,
+      gridRowGap: 12.5,
       [`${theme.breakpoints.down('md')} and (orientation: landscape)`]: {
         padding: '25px 0',
     },
@@ -82,18 +82,34 @@ const useStyles = makeStyles(() => ({
 
 function App() {
 
+
+   // Timer
+   const [isCountingDown, setIsCountingDown] = useState(false);
+   const [timerPhase, setTimerPhase] = useState('session');
+   const [timerValue, setTimerValue] = useState(1500);
+
   // Break
   const [breakLength, setBreakLength] = useState(5);
 
   const incrementBreakLength = () => {
     if (!isCountingDown && breakLength < 60) {
       setBreakLength(breakLength + 1);
+
+      if (timerPhase==="break") {
+        setTimerValue(breakLength*60+60);
+      }
+      
     }
   }
 
   const decrementBreakLength = () => {
     if (!isCountingDown && breakLength > 1) {
       setBreakLength(breakLength - 1);
+
+      if (timerPhase==="break") {
+        setTimerValue(breakLength*60-60)
+      }
+     
     }
   }
 
@@ -103,21 +119,31 @@ function App() {
   const incrementSessionLength = () => {
     if (!isCountingDown && sessionLength < 60 ) {
       setSessionLength(sessionLength + 1);
-      setTimerValue(sessionLength* 60 + 60)
+
+      if (timerPhase==="session") {
+        setTimerValue(sessionLength* 60 +60)
+      }
+      
+     
     }
   }
 
   const decrementSessionLength = () => {
     if (!isCountingDown && sessionLength > 1) {
       setSessionLength(sessionLength -1);
-      setTimerValue(sessionLength* 60 -60)
+        
+
+        if (timerPhase==="session") {
+          setTimerValue(sessionLength* 60 -60)
+        }
+      
     }
   }
 
-  // Timer
-  const [isCountingDown, setIsCountingDown] = useState(false);
-  const [timerPhase, setTimerPhase] = useState('session');
-  const [timerValue, setTimerValue] = useState(1500);
+ 
+
+
+  const audioEl = useRef(null);
 
   useEffect(() => {
     const switchPhase = () => {
@@ -130,28 +156,39 @@ function App() {
       }
     };
 
-    // Interval - to be checked
 
     let intervalId;
-    if (isCountingDown && timerValue > 0) {
+    if (isCountingDown && timerValue > 1) {
       intervalId = setInterval(() => {
         setTimerValue(timerValue -1);
       }, 1000);
 
+      console.log(timerValue)
+
       // The timer has reached zero 
-    } else if (isCountingDown && timerValue === 0) {
+    } else if (isCountingDown && timerValue === 1) {
       intervalId = setInterval(() => {
         setTimerValue(timerValue - 1);
       }, 1000);
-      switchPhase();
+      console.log(timerValue)
+      audioEl.current.currentTime=0;
+      audioEl.current.play()
+
+      setTimeout(() => {
+        switchPhase();
+      },1000);
+     
+
+
+     
     } else {
       clearInterval(intervalId);
     } 
 
-      // Clean up
+      // Clean up before the component unmounts
+    return () =>  clearInterval(intervalId);
 
-    return () => clearInterval(intervalId);
-  });
+  }, [isCountingDown,timerValue]);
 
     // Start Timer
     const startTimer = () => {
@@ -161,6 +198,7 @@ function App() {
     // Stop Timer
     const stopTimer = () => {
       setIsCountingDown(false);
+
     }
 
     // Reset
@@ -170,7 +208,12 @@ function App() {
       setTimerValue(1500);
       setBreakLength(5);
       setSessionLength(25);
+      audioEl.current.pause();
+      audioEl.current.currentTime=0;
+
     }
+
+
 
     const classes = useStyles();
 
@@ -202,6 +245,8 @@ function App() {
             session = {timerPhase}
             backgroundColor={theme.palette.secondary.main}
           />
+          
+
           <Buttons
           session={timerPhase}
           isCountingDown={isCountingDown}
@@ -209,7 +254,7 @@ function App() {
           onReset={resetTimer}
           />
         </Container>
-        <Footer />
+        <audio ref={audioEl} src={gong} id="beep"></audio>
       </div>
     </div>
     </ThemeProvider>

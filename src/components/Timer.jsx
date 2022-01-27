@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 import { Typography, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
@@ -20,8 +20,26 @@ const useStyles = makeStyles({
 })
  const Timer = ({ session, length }) => {
 
+    const audioEl = useRef(null);
     const classes = useStyles();
     const bgColor = session === 'break' ? 'success.main' : 'secondary.main';
+
+    
+    const playSound = () => {
+    
+        const audio = audioEl.current;
+        if (audio === null) return;
+    
+        audio.currentTime = 0;
+        audio.play();
+    }
+
+    const stopSound = () => {
+        const audio = audioEl.current;
+        if (audio === null) return;
+    
+        audio.pause();
+    }
 
     return(
         <Box className={classes.root} backgroundColor={bgColor}>
@@ -38,6 +56,7 @@ const useStyles = makeStyles({
             >
                 {length}
             </Typography>
+            <audio ref={audioEl} src="src/Bell Sound Ring-SoundBible.com-181681426.mp3" className="beep" id="beep"></audio>
         </Box>
     )
 }

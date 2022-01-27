@@ -25,8 +25,9 @@ const useStyles = makeStyles({
     }
 })
 
-export default function PhaseControl( {session, length, onArrowUp, onArrowDown }) {
+export default function PhaseControl( {phase, session, length, onArrowUp, onArrowDown }) {
 
+    const bgColor = phase === 'break' ? 'success' : 'secondary';
     const classes = useStyles();
     const handleArrowDown = () => {
         onArrowDown();
@@ -46,7 +47,7 @@ export default function PhaseControl( {session, length, onArrowUp, onArrowDown }
                 onClick={handleArrowDown}
              
             >
-                <ArrowDownwardOutlinedIcon fontSize="large" color='secondary'/>
+                <ArrowDownwardOutlinedIcon fontSize="large" color={bgColor}/>
             </IconButton>
             <Typography variant="h6" id={`${session}-length`}>
                 {length}
@@ -56,7 +57,7 @@ export default function PhaseControl( {session, length, onArrowUp, onArrowDown }
                 id={`${session}-increment`}
                 onClick={handleArrowUp}
             >
-                <ArrowUpwardOutlinedIcon fontSize="large" color='secondary'/>
+                <ArrowUpwardOutlinedIcon fontSize="large" color={bgColor}/>
             </IconButton>
 
         </Box>

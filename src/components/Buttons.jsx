@@ -8,10 +8,12 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
     root: {
-        display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
-        width: '50%',
-        margin: 15,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent:'space-evenly',
+        alignItems: 'center',
+        width: '85%',
+        margin: 'auto',
     }
 })
 
@@ -24,14 +26,14 @@ const Buttons = ({ isCountingDown, onStartStop, onReset, session }) => {
     return(
         <div className = {classes.root}>
             <IconButton
-            id="start-stop"
+            id="start_stop"
             onClick={() => onStartStop()}
             >
                 {/* Change icon accordingly to timer state */}
                 {isCountingDown ? (
                     <PauseCircleOutlineIcon fontSize="large" color={bgColor}/>
                 ) : (
-                    <PlayCircleOutlineIcon fontSize="large" color={bgColor}/>
+                    <PlayCircleOutlineIcon fontSize='large' color={bgColor}/>
                 )}
             </IconButton>
 

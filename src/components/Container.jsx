@@ -3,11 +3,10 @@ import { Paper } from '@mui/material';
 
 
 const containerStyles = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(1, 1fr)',
+    display:'grid',
+    gridTemplateRows: '1fr 1.75fr 1fr',
     backgroundColor: 'primary.main',
     backgroundImage: 'none',
-    justifyItems: 'center',
     '@media screen and (max-width: 414px)': {
         width:'100vw',
     },
