@@ -163,23 +163,22 @@ function App() {
         setTimerValue(timerValue -1);
       }, 1000);
 
-      console.log(timerValue)
+      // console.log(timerValue)
 
       // The timer has reached zero 
     } else if (isCountingDown && timerValue === 1) {
-      intervalId = setInterval(() => {
-        setTimerValue(timerValue - 1);
-      }, 1000);
-      console.log(timerValue)
-      audioEl.current.currentTime=0;
-      audioEl.current.play()
-
+      // intervalId = setInterval(() => {
+      //   setTimerValue(timerValue -1);
+      // }, 1000);
+      // console.log(timerValue)
+      setTimeout(() => {
+        setTimerValue(0)
+        audioEl.current.play()
+      },1000)
+      // audioEl.current.currentTime=0;
       setTimeout(() => {
         switchPhase();
-      },1000);
-     
-
-
+      },2000);
      
     } else {
       clearInterval(intervalId);
@@ -188,7 +187,7 @@ function App() {
       // Clean up before the component unmounts
     return () =>  clearInterval(intervalId);
 
-  }, [isCountingDown,timerValue]);
+  }, [isCountingDown,timerValue,breakLength,sessionLength,timerPhase]);
 
     // Start Timer
     const startTimer = () => {
